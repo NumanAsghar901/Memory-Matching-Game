@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Memory Matching Game</title>
+    <link rel="stylesheet" href="game.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  </head>
+  <body>
+    <div class="particles" id="particles"></div>
+    <header class="header">
+      <div class="header-left">
+        <h1 class="logo"><i class="fas fa-brain"></i> Memory Matching Game</h1>
+      </div>
+      <div class="header-right">
+        <button class="btn btn-icon" id="musicToggle" title="Toggle Music"><i class="fas fa-music"></i></button>
+        <button class="btn btn-icon" id="themeToggle" title="Toggle Theme"><i class="fas fa-moon"></i></button>
+      </div>
+    </header>
+
+    <main class="main-container">
+      <section class="control-panel glass-card">
+        <div class="difficulty-selector">
+          <span class="label">Difficulty:</span>
+          <div class="btn-group">
+            <button class="btn btn-diff active" data-diff="easy"><i class="fas fa-seedling"></i> Easy</button>
+            <button class="btn btn-diff" data-diff="medium"><i class="fas fa-fire"></i> Medium</button>
+            <button class="btn btn-diff" data-diff="hard"><i class="fas fa-skull"></i> Hard</button>
+          </div>
+        </div>
+        <div class="game-actions">
+          <button class="btn btn-primary" id="newGameBtn"><i class="fas fa-redo"></i> New Game</button>
+          <button class="btn btn-secondary" id="leaderboardBtn"><i class="fas fa-trophy"></i> Leaderboard</button>
+        </div>
+      </section>
+
+      <section class="stats-bar glass-card">
+        <div class="stat">
+          <i class="fas fa-clock stat-icon"></i>
+          <div class="stat-content"><span class="stat-label">Time</span><span class="stat-value" id="timer">00:00</span></div>
+        </div>
+        <div class="stat">
+          <i class="fas fa-hand-pointer stat-icon"></i>
+          <div class="stat-content"><span class="stat-label">Moves</span><span class="stat-value" id="moveCounter">0</span></div>
+        </div>
+        <div class="stat">
+          <i class="fas fa-star stat-icon"></i>
+          <div class="stat-content"><span class="stat-label">Pairs</span><span class="stat-value" id="pairsFound">0/<span id="totalPairs">6</span></span></div>
+        </div>
+        <div class="stat">
+          <i class="fas fa-percentage stat-icon"></i>
+          <div class="stat-content"><span class="stat-label">Accuracy</span><span class="stat-value" id="accuracy">100%</span></div>
+        </div>
+      </section>
+
+      <section class="board-wrapper">
+        <div class="game-board easy" id="gameBoard"></div>
+      </section>
+    </main>
+
+    <!-- WIN MODAL -->
+    <div class="modal-overlay" id="winModal">
+      <div class="modal glass-card">
+        <div class="modal-confetti" id="confettiContainer"></div>
+        <div class="modal-icon">🎉</div>
+        <h2 class="modal-title">You Win!</h2>
+        <p class="modal-subtitle">You matched them all!</p>
+        <div class="modal-stats">
+          <div class="modal-stat"><i class="fas fa-clock"></i><div><span class="modal-stat-label">Time</span><span class="modal-stat-value" id="finalTime">--</span></div></div>
+          <div class="modal-stat"><i class="fas fa-hand-pointer"></i><div><span class="modal-stat-label">Moves</span><span class="modal-stat-value" id="finalMoves">--</span></div></div>
+          <div class="modal-stat"><i class="fas fa-star"></i><div><span class="modal-stat-label">Score</span><span class="modal-stat-value" id="finalScore">--</span></div></div>
+        </div>
+        <div class="modal-rating" id="modalRating"></div>
+
+        <!-- Player name input for leaderboard -->
+        <div class="name-input-wrapper">
+          <input type="text" id="playerName" class="name-input" placeholder="Enter your name for leaderboard..." maxlength="20" />
+        </div>
+
+        <div class="modal-actions">
+          <button class="btn btn-primary" id="saveScoreBtn"><i class="fas fa-save"></i> Save Score</button>
+          <button class="btn btn-secondary" id="playAgainBtn"><i class="fas fa-redo"></i> Play Again</button>
+          <button class="btn btn-outline" id="viewLeaderboardBtn"><i class="fas fa-trophy"></i> Leaderboard</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- LEADERBOARD MODAL -->
+    <div class="modal-overlay" id="leaderboardModal">
+      <div class="modal glass-card leaderboard-modal">
+        <button class="modal-close" id="closeLeaderboard"><i class="fas fa-times"></i></button>
+        <h2 class="modal-title"><i class="fas fa-trophy"></i> Leaderboard</h2>
+        <div class="leaderboard-tabs">
+          <button class="lb-tab active" data-diff="easy">Easy</button>
+          <button class="lb-tab" data-diff="medium">Medium</button>
+          <button class="lb-tab" data-diff="hard">Hard</button>
+        </div>
+        <div class="lb-source-info">
+          <span id="lbSourceLabel" class="lb-source-badge"><i class="fas fa-cloud"></i> Firebase</span>
+        </div>
+        <div class="leaderboard-content" id="leaderboardContent">
+          <div class="lb-loading"><i class="fas fa-spinner fa-spin"></i> Loading scores...</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script type="module" src="game.js"></script>
+  </body>
+</html>
