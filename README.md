@@ -54,7 +54,4 @@ Memory-Matching-Game/
 - Mobile-friendly grid options
 - Leaderboard (localStorage)
 
----
 
-## License
-Add a license if you plan to share/modify publicly (MIT is common).
